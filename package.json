@@ -1,8 +1,8 @@
 {
   "name": "mushroomic-cards",
   "version": "1.0.0",
-  "description": "Mushroom cards on steroids — style EVERYTHING",
-  "main": "dist/mushroomic.js",
+  "description": "Mushroom cards on steroids — style and animate EVERYTHING",
+  "main": "index.js",
   "scripts": {
     "start": "rollup -c --watch --bundleConfigAsCjs",
     "build": "rollup -c --bundleConfigAsCjs",
