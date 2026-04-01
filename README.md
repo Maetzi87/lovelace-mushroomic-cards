@@ -1,197 +1,142 @@
-# 🍄 Mushroom
+# 🍄 Mushroomic Cards - Mushroom on steroids
 
-[![hacs][hacs-badge]][hacs-url]
-[![release][release-badge]][release-url]
-![downloads][downloads-badge]
-![build][build-badge]
-[![translations][translations-badge]][weblate-url]
+Mushroomic Power Card builds on the clean, elegant design language of the popular Mushroom ecosystem, but focuses on **extended customization**, **template‑driven styling**, and **fine‑grained control** over typography and sizing.
 
-<a href="https://www.buymeacoffee.com/piitaya" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/white_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+Mushroomic Cards mimic the familiar Mushroom look while adding the flexibility many users have been missing.
 
-![Overview](https://user-images.githubusercontent.com/5878303/152332130-760cf616-5c40-4825-a482-bb8f1f0f5251.png)
+---
 
-## What is mushroom ?
+## 🌟 Key Enhancements
 
-Mushroom is a collection of cards for [Home Assistant][home-assistant] Dashboard UI.
+- **Template support** for all visual fields  
+- **Dynamic tile, icon, and badge sizing**  
+- **Advanced font styling** (size, weight, color, spacing, line height)  
+- **Badge styling** (icon size, color, text badge option)  
+- **Automatic scaling**  
+- **Weather SVG support**  
+- **Inline or bottom feature positioning**  
+- **Vertical layout mode**  
+- **Multiline secondary text**  
+- **Auto-animated Icons**
 
-Mushroom mission is to propose easy to use components to build your [Home Assistant][home-assistant] dashboard.
+All while staying lightweight, fast, and visually consistent with Mushroom — but far more customizable.
 
-### Features
+---
 
-- 🛠 Editor for **all cards** and and **all options** (no need to edit `yaml`)
-- 😍 Icon picker
-- 🖌 Color picker
-- 🚀 0 dependencies : no need to install another card.
-- 🌈 Based on Material UI colors
-- 🌓 Light and dark theme support
-- 🎨 Optional theme customization
-- 🌎 Internationalization
+## 🧰 Installation
 
-The goal of Mushroom is not to provide custom card for deep customization. You can use the excellent [UI Lovelace Minimalist][ui-lovelace-minimalist] and [Button card][button-card] plugins for this.
+Mushroomic is completely independent and can be installed alongside Mushroom without conflicts.  
+Your existing Mushroom cards will continue to work as usual.
 
-## Installation
+### HACS (Custom Repository)
 
-### HACS
+1. Open **HACS** in Home Assistant  
+2. Go to **Integrations → Custom repositories**  
+3. Add this repository URL:  
+   https://github.com/maetzi87/lovelace-mushroomic-cards
+4. Select **Category: Lovelace**  
+5. Click **Add**  
+6. Install **Mushroomic Power Card** from the HACS list  
+7. Make sure the resource is added automatically (HACS usually handles this)
+8. If the resource is not added automatically, add it manually under Settings → Dashboards → Resources.
 
-Mushroom is available in [HACS][hacs] (Home Assistant Community Store).
+### Manual Installation
 
-Use this link to directly go to the repository in HACS
+1. Download the `mushroomic.js` file from the latest release.
+2. Place the file into your `config/www/lovelace-mushroomic-cards/` folder.
+3. Add the resource to your Dashboard:
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=piitaya&repository=lovelace-mushroom)
+**Using UI:**  
+_Settings → Dashboards → More Options → Resources → Add Resource_  
+URL: `/local/lovelace-mushroomic-cards/mushroomic.js`  
+Type: `JavaScript Module`
 
-_or_
+**Using YAML:**
+```yaml
+resources:
+  - url: /local/lovelace-mushroomic-cards/mushroomic.js
+    type: module
 
-1. Install HACS if you don't have it already
-2. Open HACS in Home Assistant
-3. Search for "Mushroom"
-4. Click the download button. ⬇️
+```
+---
 
-### Manual
+## 🔧 Available Options
 
-1. Download `mushroom.js` file from the [latest release][release-url].
-2. Put `mushroom.js` file into your `config/www` folder.
-3. Add reference to `mushroom.js` in Dashboard. There's two way to do that:
-   - **Using UI:** _Settings_ → _Dashboards_ → _More Options icon_ → _Resources_ → _Add Resource_ → Set _Url_ as `/local/mushroom.js` → Set _Resource type_ as `JavaScript Module`.
-     **Note:** If you do not see the Resources menu, you will need to enable _Advanced Mode_ in your _User Profile_
-   - **Using YAML:** Add following code to `lovelace` section.
-     ```yaml
-     resources:
-       - url: /local/mushroom.js
-         type: module
-     ```
+The Mushroomic Resize Card supports a wide range of fields.  
+Fields marked **Template** accept Jinja‑style Home Assistant templates.
 
-## Usage
 
-All the Mushroom cards can be configured using Dashboard UI editor.
+### 🖥️ Basic Options (Editor-friendly)
 
-1. In Dashboard UI, click 3 dots in top right corner.
-2. Click _Edit Dashboard_.
-3. Click Plus button to add a new card.
-4. Find one of the _Custom: Mushroom_ card in the list.
+All variables are optional.
 
-### Cards
+| Option                     | Default        | Template | Allowed Units / Formats | Description |
+|---------------------------|----------------|----------|--------------------------|-------------|
+| `entity`                  | —              | ❌       | —                        | Entity used for actions and context |
+| `area`                    | —              | ❌       | —                        | Area context for features |
+| `primary`                 | —              | ✔        | text / template          | Primary text content |
+| `secondary`               | —              | ✔        | text / template          | Secondary text content |
+| `color`                   | —              | ✔        | hex, rgb(), rgba(), var() | Icon/shape color |
+| `icon`                    | —              | ✔        | any installed icon       | Icon |
+| `picture`                 | —              | ✔        | URL                      | Picture URL instead of icon |
+| `badge_icon`              | —              | ✔        | any installed icon       | Badge icon |
+| `badge_text`              | —              | ✔        | text / template          | Badge text (overrides icon) |
+| `badge_color`             | —              | ✔        | hex, rgb(), rgba(), var() | Badge background color |
+| `badge_icon_color`        | —              | ✔        | hex, rgb(), rgba(), var() | Badge icon color |
+| `shape_size`               | `"36px"`       | ✔        | px, rem, %, calc()       | Size of shape behind icon |
+| `badge_size`              | `32% of tile`  | ✔        | px, rem, %, calc()       | Badge size override |
+| `content_layout`          | `"horizontal"` | ❌       | horizontal / vertical    | Layout selector |
+| `multiline_secondary`     | `false`        | ❌       | true / false             | Allow multiline secondary text |
+| `features_position`       | `"bottom"`     | ❌       | bottom / inline          | Position of feature row |
+| `features`                | —              | ❌       | list                     | List of card features |
+| `tap_action`              | `"more-info"`* | ❌       | action object            | Card tap action |
+| `hold_action`             | `"none"`       | ❌       | action object            | Card hold action |
+| `double_tap_action`       | `"none"`       | ❌       | action object            | Card double-tap action |
+| `icon_tap_action`         | auto*           | ❌       | action object            | Icon tap action |
+| `icon_hold_action`        | `"none"`       | ❌       | action object            | Icon hold action |
+| `icon_double_tap_action`  | `"none"`       | ❌       | action object            | Icon double-tap action |
 
-Different cards are available for differents entities :
+\* Default only when `entity` is set.
 
-- 🚨 [Alarm card](docs/cards/alarm-control-panel.md)
-- 🔔 [Chips card](docs/cards/chips.md)
-- 🌡 [Climate card](docs/cards/climate.md)
-- 🪟 [Cover card](docs/cards/cover.md)
-- 🪄 [Entity card](docs/cards/entity.md)
-- 🕳 [Empty card](docs/cards/empty.md)
-- 💨 [Fan card](docs/cards/fan.md)
-- 💧 [Humidifier card](docs/cards/humidifier.md)
-- 💡 [Light card](docs/cards/light.md)
-- 🔒 [Lock card](docs/cards/lock.md)
-- 📺 [Media card](docs/cards/media-player.md)
-- 🔢 [Number card](docs/cards/number.md)
-- 🙋 [Person card](docs/cards/person.md)
-- 📑 [Select card](docs/cards/select.md)
-- 🛠 [Template card](docs/cards/template.md)
-- ✏️ [Title card](docs/cards/title.md)
-- 📦 [Update card](docs/cards/update.md)
-- 🧹 [Vacuum card](docs/cards/vacuum.md)
 
-### Legacy cards
+### 🧪 Advanced Options - Unleash the _Power_ of Power-Card (currently YAML-only)
 
-Some cards are considered as legacy, are not available in the card picker but you can still use them :
+These options are fully supported but must be set manually in YAML.
+(Wiki in progress)
 
-- 🛠 [Legacy Template card](docs/cards/legacy-template.md)
+- Icon Styling
+- Text Styling
+- Card Styling
+- Badge Styling
+- Animations
+- ...
 
-### Badges
+---
 
-A [template badge](docs/badges/template.md) is available if you're using at least Home Assistant 2024.8.
+## 📝 Example YAML
+<img width="289" height="85" alt="image" src="https://github.com/user-attachments/assets/b9333cfb-bb52-412a-af27-6dea46f8060a" />
 
-### Theme customization
-
-Mushroom works without theme but you can add a theme for better experience by installing the [Mushroom Themes](https://github.com/piitaya/lovelace-mushroom-themes). If you want more information about themes, check out the official [Home Assistant documentation about themes][home-assitant-theme-docs].
-
-## Development server
-
-### Home assistant demo
-
-You can run a demo instance of Home Assistant with docker by running:
-
-```sh
-npm run start:hass
+```yaml
+type: custom:mushroomic-power-card
+entity: sensor.sensor_bad_temperatur
+icon: mdi:thermometer
+color: purple
+icon_tap_action:
+  action: more-info
+primary: "{{ state_attr(entity, 'friendly_name') }}"
+secondary: "{{ states(entity) }}"
+shape_size: 40px
+badge_icon: mdi:eye
+badge_color: |
+  {% if states(config.entity) | float(0) > 17 %} #34eb3d
+  {% else %} rgb(52, 103, 235)
+  {% endif %}
 ```
 
-Once it's done, go to Home Assistant instance [http://localhost:8123](http://localhost:8123) and start configuration.
+---
 
-#### Windows Users
+❤️ Credits
 
-If you are on Windows, either run the above command in Powershell, or use the below if using Command Prompt:
+A huge thanks to piitaya for the original Mushroom concept and design language that made this project possible.  
+Mushroomic is an independent extension that expands these ideas with additional customization options.
 
-```sh
-npm run start:hass-cmd
-```
-
-### Development
-
-In another terminal, install dependencies and run development server:
-
-```sh
-npm install
-npm start
-```
-
-Server will start on port `4000`.
-
-### Build
-
-You can build the `mushroom.js` file in `dist` folder by running the build command.
-
-```sh
-npm run build
-```
-
-### Translations
-
-If you want to help translating Mushroom, you can translate it directly from your browser using [Weblate][weblate-url].
-
-### Maintainer steps to add a new language
-
-1. To be compatible with Home Assistant, language tags have to follow [BCP 47](https://www.rfc-editor.org/info/bcp47). A list of most language tags can be found here: [IANA subtag registry](http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry). Examples: `fr`, `fr-CA`, `zh-Hans`.
-2. Create a new file `{language_code}.json` with your language code in the [translation folder](https://github.com/piitaya/lovelace-mushroom/tree/main/src/translations). Examples: `fr.json`.
-3. Import your file into the [`localize.ts file`](https://github.com/piitaya/lovelace-mushroom/blob/main/src/localize.ts) and add your language in the `languages` record.
-4. Don't forget to test locally with the development server by choosing the language with the Home Assistant UI in your profile.
-
-## Troubleshooting
-
-### I don't see the last changes
-
-1. Check that your Home Assistant version is the latest. Some new Mushroom features can only be visible for the latest Home Assistant version.
-2. Check that you have the latest Mushroom version on HACS
-3. Check that you have the latest Mushroom version by checking the browser console
-4. Clear your cache :
-   - delete mushroom resources (https://my.home-assistant.io/redirect/lovelace_resources/)
-   - uninstall Mushroom from HACS
-   - reinstall Mushroom from HACS
-
-### My card mod configuration doesn't work.
-
-Help about card mod configuration is not provided in this repository. More info in the [state of card mod support](https://github.com/piitaya/lovelace-mushroom/issues/1366).
-
-## Credits
-
-The design is inspired by [7ahang’s work][7ahang] on Behance and [Ui Lovelace Minimalist][ui-lovelace-minimalist].
-
-<!-- Badges -->
-
-[hacs-url]: https://github.com/hacs/integration
-[hacs-badge]: https://img.shields.io/badge/hacs-default-orange.svg?style=flat-square
-[release-badge]: https://img.shields.io/github/v/release/piitaya/lovelace-mushroom?style=flat-square
-[downloads-badge]: https://img.shields.io/github/downloads/piitaya/lovelace-mushroom/total?style=flat-square
-[build-badge]: https://img.shields.io/github/actions/workflow/status/piitaya/lovelace-mushroom/build.yml?branch=main&style=flat-square
-[translations-badge]: https://hosted.weblate.org/widget/mushroom/svg-badge.svg
-
-<!-- References -->
-
-[home-assistant]: https://www.home-assistant.io/
-[home-assitant-theme-docs]: https://www.home-assistant.io/integrations/frontend/#defining-themes
-[hacs]: https://hacs.xyz
-[ui-lovelace-minimalist]: https://ui-lovelace-minimalist.github.io/UI/
-[button-card]: https://github.com/custom-cards/button-card
-[7ahang]: https://www.behance.net/gallery/88433905/Redesign-Smart-Home
-[release-url]: https://github.com/piitaya/lovelace-mushroom/releases
-[weblate-url]: https://hosted.weblate.org/engage/mushroom/
